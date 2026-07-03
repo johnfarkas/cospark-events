@@ -61,6 +61,12 @@
         .section-headline { text-wrap: balance; }
         .section-sub { text-wrap: pretty; }
 
+        /* Tighten the gap between the intro and the Spaces section */
+        #intro { padding-bottom: clamp(1.75rem, 3.5vw, 3rem); }
+        #spaces { padding-top: clamp(1.75rem, 3.5vw, 3rem); }
+        /* Left-align the Spaces heading (override the centered .faq default) */
+        #spaces .section-headline { text-align: left; }
+
         /* ── Space cards ── */
         .spaces-grid {
             display: grid;
@@ -252,11 +258,11 @@
     </section>
 
     <!-- ══════════════ Intro ══════════════ -->
-    <section class="section">
+    <section class="section" id="intro">
         <div class="container">
             <div class="content-grid">
                 <div class="reveal">
-                    <p class="eyebrow">Community Event Spaces</p>
+                    <p class="eyebrow">A community hub</p>
                     <h2 class="section-headline">A place built for gathering.</h2>
                 </div>
                 <div class="reveal">
