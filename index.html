@@ -639,12 +639,19 @@
                 if (!img.naturalWidth) return null;
                 return Math.round(img.clientWidth * img.naturalHeight / img.naturalWidth);
             }
+            // Full open height of the panel, including the inner block's top/bottom margins
+            // (scrollHeight alone omits margins and clips the last rows of content).
+            function panelTarget(panel) {
+                var inner = panel.firstElementChild;
+                var cs = getComputedStyle(inner);
+                return Math.ceil(inner.offsetHeight + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom));
+            }
             function sizeOpen(room) {
                 var img = room.querySelector('.room__media img');
                 var h = fullImgHeight(img);
                 if (h) img.style.height = h + 'px';
                 var panel = room.querySelector('.room__more');
-                panel.style.maxHeight = panel.firstElementChild.scrollHeight + 'px';
+                panel.style.maxHeight = panelTarget(panel) + 'px';
             }
             function setOpen(room, open) {
                 var btn = room.querySelector('.room__toggle');
@@ -656,7 +663,7 @@
                 if (open) {
                     var h = fullImgHeight(img);
                     if (h) img.style.height = h + 'px';
-                    panel.style.maxHeight = panel.firstElementChild.scrollHeight + 'px';
+                    panel.style.maxHeight = panelTarget(panel) + 'px';
                 } else {
                     img.style.height = '';
                     panel.style.maxHeight = '0';
