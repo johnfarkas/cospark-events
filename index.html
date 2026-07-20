@@ -119,30 +119,27 @@
         /* ── Room cards (expandable) ── */
         .rooms { display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2.25rem); max-width: 940px; margin: clamp(2.5rem, 4vw, 3.5rem) auto 0; }
         .room { background: var(--surface-page); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(40,56,69,0.05); }
-        .room__head { display: grid; grid-template-columns: 300px 1fr; gap: clamp(1.25rem, 3vw, 2rem); align-items: center; padding: clamp(1rem, 2vw, 1.35rem); }
-        .room__thumb { border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3; }
-        .room__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        /* Single picture: cropped banner when closed, zooms out to full frame when open */
+        .room__media { overflow: hidden; background: var(--slate-100); cursor: pointer; }
+        .room__media img { width: 100%; height: 220px; object-fit: cover; object-position: center; display: block; transition: height 0.55s ease; }
+        .room__body { padding: clamp(1.15rem, 2.4vw, 1.6rem) clamp(1.25rem, 2.6vw, 1.85rem) clamp(1.35rem, 2.6vw, 1.85rem); }
+        .room__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: clamp(1rem, 2.5vw, 1.75rem); }
         .room__name { font-family: var(--font-sans); font-size: clamp(1.375rem, 2.2vw, 1.625rem); font-weight: var(--weight-bold); color: var(--slate-800); letter-spacing: -0.01em; margin-bottom: 0.35rem; }
-        .room__tagline { font-family: var(--font-serif); font-style: italic; font-size: 1.0625rem; line-height: var(--leading-small); color: var(--slate-500); max-width: none; margin-bottom: 1rem; }
-        .room__stats { list-style: none; display: flex; flex-wrap: wrap; gap: 0.85rem 1.75rem; margin-bottom: 1.25rem; }
-        .room__stats li { font-family: var(--font-sans); font-size: 0.95rem; font-weight: var(--weight-semibold); color: var(--slate-700); }
-        .room__stats li span { display: block; font-size: var(--text-caption); font-weight: var(--weight-bold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--copper); margin-bottom: 0.15rem; }
-        .room__toggle { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: var(--weight-semibold); color: var(--copper-700); background: var(--copper-50); border: 1px solid var(--copper-200); border-radius: 8px; padding: 0.55rem 1.1rem; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+        .room__tagline { font-family: var(--font-serif); font-style: italic; font-size: 1.0625rem; line-height: var(--leading-small); color: var(--slate-500); max-width: none; margin-bottom: 0; }
+        .room__toggle { flex-shrink: 0; margin-top: 0.2rem; display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: var(--weight-semibold); color: var(--copper-700); background: var(--copper-50); border: 1px solid var(--copper-200); border-radius: 8px; padding: 0.55rem 1.1rem; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
         .room__toggle:hover { background: var(--copper-100); border-color: var(--copper-300); }
         .room__chevron { transition: transform 0.3s ease; font-size: 1.15em; line-height: 1; }
         .room.open .room__chevron { transform: rotate(90deg); }
-        .room__more { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
-        .room__more-inner { padding: 0 clamp(1rem, 2vw, 1.35rem) clamp(1.5rem, 3vw, 2rem); border-top: 1px solid var(--border); }
-        .room__photo-lg { border-radius: 12px; overflow: hidden; margin: clamp(1.25rem, 2.5vw, 1.75rem) 0; }
-        .room__photo-lg img { width: 100%; height: auto; display: block; }
+        .room__more { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .room__more-inner { margin-top: clamp(1.2rem, 2.4vw, 1.6rem); padding-top: clamp(1.2rem, 2.4vw, 1.6rem); border-top: 1px solid var(--border); }
         .room__narrative { font-family: var(--font-serif); font-size: 1.0625rem; line-height: var(--leading-body); color: var(--slate-600); max-width: none; }
-        .room__specs { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.1rem, 2.5vw, 1.75rem); margin-top: clamp(1.5rem, 3vw, 2rem); }
+        .room__specs { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.1rem, 2.5vw, 1.75rem); margin-top: clamp(1.35rem, 2.6vw, 1.85rem); }
         .room__specs .full { grid-column: 1 / -1; }
         .room__specs h4 { font-family: var(--font-sans); font-size: var(--text-caption); font-weight: var(--weight-bold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--copper); margin-bottom: 0.4rem; }
         .room__specs p { font-family: var(--font-serif); font-size: 1rem; line-height: var(--leading-body); color: var(--slate-500); max-width: none; }
         @media (max-width: 680px) {
-            .room__head { grid-template-columns: 1fr; }
-            .room__thumb { aspect-ratio: 16 / 10; }
+            .room__media img { height: 190px; }
+            .room__bar { flex-direction: column; }
             .room__specs { grid-template-columns: 1fr; }
         }
 
@@ -313,28 +310,24 @@
             <div class="rooms">
                 <!-- Celebration Room -->
                 <article class="room reveal">
-                    <div class="room__head">
-                        <div class="room__thumb"><img src="./room-celebration.jpg" alt="The Celebration Room set up for a presentation with rows of seating" loading="lazy"></div>
-                        <div class="room__intro">
-                            <h3 class="room__name">Celebration Room</h3>
-                            <p class="room__tagline">A versatile event room for dining, receptions, and presentations.</p>
-                            <ul class="room__stats">
-                                <li><span>Size</span>16′ × 29′ · 464 sq ft</li>
-                                <li><span>Capacity</span>Seats up to 40</li>
-                                <li><span>Tech</span>60″ Smart TV · Whiteboard</li>
-                            </ul>
+                    <div class="room__media"><img src="./room-celebration.jpg" alt="The Celebration Room set up for a presentation with rows of seating" loading="lazy"></div>
+                    <div class="room__body">
+                        <div class="room__bar">
+                            <div>
+                                <h3 class="room__name">Celebration Room</h3>
+                                <p class="room__tagline">A versatile event room for dining, receptions, and presentations.</p>
+                            </div>
                             <button type="button" class="room__toggle" aria-expanded="false">More info <span class="room__chevron" aria-hidden="true">›</span></button>
                         </div>
-                    </div>
-                    <div class="room__more">
-                        <div class="room__more-inner">
-                            <div class="room__photo-lg"><img src="./room-celebration.jpg" alt="The Celebration Room" loading="lazy"></div>
-                            <p class="room__narrative">The Celebration Room is the Center's flagship event space — 464 square feet that comfortably seats 40, framed by white gallery walls, a historic exposed-brick accent, and warm wood floors. Six 8-foot wooden tables, a school table, and a podium make it equally at home for a plated dinner, a chamber mixer, or a business presentation, with a 60-inch Smart TV and whiteboard ready to go.</p>
-                            <div class="room__specs">
-                                <div><h4>Dimensions</h4><p>16′ × 29′ (~464 sq ft)</p></div>
-                                <div><h4>Capacity &amp; furniture</h4><p>40 chairs · six 8-ft wooden tables · one 6-ft school table · one podium</p></div>
-                                <div><h4>Technology</h4><p>60-inch Smart TV · whiteboard</p></div>
-                                <div class="full"><h4>Great for</h4><p>Private dining, networking events, chamber mixers, nonprofit receptions, baby &amp; bridal showers, birthday celebrations, corporate happy hours, business presentations, and community workshops.</p></div>
+                        <div class="room__more">
+                            <div class="room__more-inner">
+                                <p class="room__narrative">The Celebration Room is the Center's flagship event space — 464 square feet that comfortably seats 40, framed by white gallery walls, a historic exposed-brick accent, and warm wood floors. Six 8-foot wooden tables, a school table, and a podium make it equally at home for a plated dinner, a chamber mixer, or a business presentation, with a 60-inch Smart TV and whiteboard ready to go.</p>
+                                <div class="room__specs">
+                                    <div><h4>Dimensions</h4><p>16′ × 29′ (~464 sq ft)</p></div>
+                                    <div><h4>Capacity &amp; furniture</h4><p>Seats up to 40 · six 8-ft wooden tables · one 6-ft school table · one podium</p></div>
+                                    <div><h4>Technology</h4><p>60-inch Smart TV · whiteboard</p></div>
+                                    <div class="full"><h4>Great for</h4><p>Private dining, networking events, chamber mixers, nonprofit receptions, baby &amp; bridal showers, birthday celebrations, corporate happy hours, business presentations, and community workshops.</p></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -342,29 +335,25 @@
 
                 <!-- The Commons -->
                 <article class="room reveal">
-                    <div class="room__head">
-                        <div class="room__thumb"><img src="./room-commons.png" alt="The Commons during a networking reception with catering" loading="lazy"></div>
-                        <div class="room__intro">
-                            <h3 class="room__name">The Commons</h3>
-                            <p class="room__tagline">A flexible, light-filled gathering space with historic character.</p>
-                            <ul class="room__stats">
-                                <li><span>Size</span>13′ × 25′ · 325 sq ft</li>
-                                <li><span>Capacity</span>Up to 45</li>
-                                <li><span>Setting</span>Reception &amp; events</li>
-                            </ul>
+                    <div class="room__media"><img src="./room-commons.png" alt="The Commons during a networking reception with catering" loading="lazy"></div>
+                    <div class="room__body">
+                        <div class="room__bar">
+                            <div>
+                                <h3 class="room__name">The Commons</h3>
+                                <p class="room__tagline">A flexible, light-filled gathering space with historic character.</p>
+                            </div>
                             <button type="button" class="room__toggle" aria-expanded="false">More info <span class="room__chevron" aria-hidden="true">›</span></button>
                         </div>
-                    </div>
-                    <div class="room__more">
-                        <div class="room__more-inner">
-                            <div class="room__photo-lg"><img src="./room-commons.png" alt="The Commons" loading="lazy"></div>
-                            <p class="room__narrative">The Commons flows directly off the Bright Eyed Society, wrapped in historic exposed brick, original hardwood floors, and floor-to-ceiling industrial glass that fills it with natural light. A movable mix of dining tables, community high-tops, a rolling bar, and a mobile buffet lets it reshape in minutes — a cocktail reception one night, a class the next, a networking mixer after that.</p>
-                            <div class="room__specs">
-                                <div><h4>Dimensions</h4><p>13′ × 25′ (325 sq ft)</p></div>
-                                <div><h4>Capacity</h4><p>Cocktail reception 35–45 · classroom 20–24 · networking 35–40</p></div>
-                                <div><h4>Furnishings</h4><p>2- and 4-person dining tables · high-top community tables · bar-height seating · mobile buffet station · rolling bar · planters · flexible furniture</p></div>
-                                <div><h4>Features</h4><p>Direct connection to the Bright Eyed Society · original hardwood floors · historic exposed brick · floor-to-ceiling industrial glass · abundant natural light · street-facing windows</p></div>
-                                <div class="full"><h4>Great for</h4><p>Restaurant overflow, private dining, networking events, chamber mixers, nonprofit receptions, baby &amp; bridal showers, birthday celebrations, corporate happy hours, business presentations, and community workshops.</p></div>
+                        <div class="room__more">
+                            <div class="room__more-inner">
+                                <p class="room__narrative">The Commons flows directly off the Bright Eyed Society, wrapped in historic exposed brick, original hardwood floors, and floor-to-ceiling industrial glass that fills it with natural light. A movable mix of dining tables, community high-tops, a rolling bar, and a mobile buffet lets it reshape in minutes — a cocktail reception one night, a class the next, a networking mixer after that.</p>
+                                <div class="room__specs">
+                                    <div><h4>Dimensions</h4><p>13′ × 25′ (325 sq ft)</p></div>
+                                    <div><h4>Capacity</h4><p>Cocktail reception 35–45 · classroom 20–24 · networking 35–40</p></div>
+                                    <div><h4>Furnishings</h4><p>2- and 4-person dining tables · high-top community tables · bar-height seating · mobile buffet station · rolling bar · planters · flexible furniture</p></div>
+                                    <div><h4>Features</h4><p>Direct connection to the Bright Eyed Society · original hardwood floors · historic exposed brick · floor-to-ceiling industrial glass · abundant natural light · street-facing windows</p></div>
+                                    <div class="full"><h4>Great for</h4><p>Restaurant overflow, private dining, networking events, chamber mixers, nonprofit receptions, baby &amp; bridal showers, birthday celebrations, corporate happy hours, business presentations, and community workshops.</p></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -372,28 +361,24 @@
 
                 <!-- Library -->
                 <article class="room reveal">
-                    <div class="room__head">
-                        <div class="room__thumb"><img src="./room-library.png" alt="The Library meeting room with a conference table and Smart TV" loading="lazy"></div>
-                        <div class="room__intro">
-                            <h3 class="room__name">Library</h3>
-                            <p class="room__tagline">A quiet meeting, streaming, and collaboration space.</p>
-                            <ul class="room__stats">
-                                <li><span>Size</span>18′ × 16′ · 288 sq ft</li>
-                                <li><span>Best for</span>Small groups</li>
-                                <li><span>Tech</span>60″ Smart TV · Streaming</li>
-                            </ul>
+                    <div class="room__media"><img src="./room-library.png" alt="The Library meeting room with a conference table and Smart TV" loading="lazy"></div>
+                    <div class="room__body">
+                        <div class="room__bar">
+                            <div>
+                                <h3 class="room__name">Library</h3>
+                                <p class="room__tagline">A quiet meeting, streaming, and collaboration space.</p>
+                            </div>
                             <button type="button" class="room__toggle" aria-expanded="false">More info <span class="room__chevron" aria-hidden="true">›</span></button>
                         </div>
-                    </div>
-                    <div class="room__more">
-                        <div class="room__more-inner">
-                            <div class="room__photo-lg"><img src="./room-library.png" alt="The Library" loading="lazy"></div>
-                            <p class="room__narrative">The Library is a quiet room built for focused work and content. A large conference table anchors the space beneath an exposed-brick accent wall, with a 60-inch Smart TV, a whiteboard, and dedicated streaming equipment on hand — ideal for a board meeting, recording a podcast, or a small collaborative session.</p>
-                            <div class="room__specs">
-                                <div><h4>Dimensions</h4><p>18′ × 16′ (~288 sq ft)</p></div>
-                                <div><h4>Use</h4><p>Flexible meeting room · streaming / podcast room</p></div>
-                                <div><h4>Furnishings</h4><p>Large conference table · 60-inch Smart TV · whiteboard</p></div>
-                                <div><h4>Technology</h4><p>Dedicated streaming equipment</p></div>
+                        <div class="room__more">
+                            <div class="room__more-inner">
+                                <p class="room__narrative">The Library is a quiet room built for focused work and content. A large conference table anchors the space beneath an exposed-brick accent wall, with a 60-inch Smart TV, a whiteboard, and dedicated streaming equipment on hand — ideal for a board meeting, recording a podcast, or a small collaborative session.</p>
+                                <div class="room__specs">
+                                    <div><h4>Dimensions</h4><p>18′ × 16′ (~288 sq ft)</p></div>
+                                    <div><h4>Use</h4><p>Flexible meeting room · streaming / podcast room</p></div>
+                                    <div><h4>Furnishings</h4><p>Large conference table · 60-inch Smart TV · whiteboard</p></div>
+                                    <div><h4>Technology</h4><p>Dedicated streaming equipment</p></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -647,25 +632,45 @@
         }, { passive: true });
 
         // ── Room "More info" expand/collapse ──
+        // On open, the single room picture zooms out (its height grows to the full frame)
+        // and the detail panel below it expands. No duplicate image, no repeated stats.
         (function() {
+            function fullImgHeight(img) {
+                if (!img.naturalWidth) return null;
+                return Math.round(img.clientWidth * img.naturalHeight / img.naturalWidth);
+            }
             function sizeOpen(room) {
+                var img = room.querySelector('.room__media img');
+                var h = fullImgHeight(img);
+                if (h) img.style.height = h + 'px';
                 var panel = room.querySelector('.room__more');
                 panel.style.maxHeight = panel.firstElementChild.scrollHeight + 'px';
             }
-            document.querySelectorAll('.room__toggle').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var room = btn.closest('.room');
-                    var panel = room.querySelector('.room__more');
-                    var open = room.classList.toggle('open');
-                    btn.setAttribute('aria-expanded', open);
-                    btn.childNodes[0].nodeValue = open ? 'Less info ' : 'More info ';
-                    panel.style.maxHeight = open ? panel.firstElementChild.scrollHeight + 'px' : '0';
-                });
-            });
-            // Recompute height if an enlarged photo loads after the panel is open, or on resize
-            document.querySelectorAll('.room__photo-lg img').forEach(function(img) {
+            function setOpen(room, open) {
+                var btn = room.querySelector('.room__toggle');
+                var img = room.querySelector('.room__media img');
+                var panel = room.querySelector('.room__more');
+                room.classList.toggle('open', open);
+                btn.setAttribute('aria-expanded', open);
+                btn.childNodes[0].nodeValue = open ? 'Less info ' : 'More info ';
+                if (open) {
+                    var h = fullImgHeight(img);
+                    if (h) img.style.height = h + 'px';
+                    panel.style.maxHeight = panel.firstElementChild.scrollHeight + 'px';
+                } else {
+                    img.style.height = '';
+                    panel.style.maxHeight = '0';
+                }
+            }
+            document.querySelectorAll('.room').forEach(function(room) {
+                var btn = room.querySelector('.room__toggle');
+                var media = room.querySelector('.room__media');
+                function toggle() { setOpen(room, !room.classList.contains('open')); }
+                btn.addEventListener('click', toggle);
+                media.addEventListener('click', toggle);
+                // Recompute once the image loads, if the room is already open
+                var img = media.querySelector('img');
                 img.addEventListener('load', function() {
-                    var room = img.closest('.room');
                     if (room.classList.contains('open')) sizeOpen(room);
                 });
             });
