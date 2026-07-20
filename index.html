@@ -122,7 +122,7 @@
         /* Single picture: cropped banner when closed, zooms out to full frame when open.
            Title + tagline are captioned over a white gradient at the photo's floor-space bottom. */
         .room__media { position: relative; overflow: hidden; background: var(--slate-100); cursor: pointer; }
-        .room__media img { width: 100%; height: 240px; object-fit: cover; object-position: center; display: block; transition: height 0.55s ease; }
+        .room__media img { width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block; transition: height 0.55s ease; }
         .room__media::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 42%, var(--surface-page) 92%); pointer-events: none; }
         .room__caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(0.85rem, 2.5vw, 1.75rem); padding: clamp(0.9rem, 2.2vw, 1.35rem) clamp(1.25rem, 2.6vw, 1.85rem); }
         .room__name { font-family: var(--font-sans); font-size: clamp(1.375rem, 2.2vw, 1.625rem); font-weight: var(--weight-bold); color: var(--slate-800); letter-spacing: -0.01em; margin-bottom: 0.25rem; text-shadow: 0 1px 2px rgba(255,255,255,0.7); }
