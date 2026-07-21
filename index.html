@@ -146,21 +146,6 @@
             .room__specs { grid-template-columns: 1fr; }
         }
 
-        /* ── Location / 3D renderings placeholder ── */
-        .plan-block { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-        .plan-ph {
-            aspect-ratio: 16 / 7;
-            border-radius: 16px;
-            border: 1px dashed var(--slate-300);
-            background:
-                repeating-linear-gradient(45deg, var(--slate-50), var(--slate-50) 14px, var(--slate-100) 14px, var(--slate-100) 28px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
-            text-align: center; color: var(--slate-500); padding: 2rem;
-        }
-        .plan-ph svg { width: 52px; height: 52px; color: var(--copper); opacity: 0.85; }
-        .plan-ph strong { font-family: var(--font-sans); font-size: 1.0625rem; font-weight: var(--weight-bold); color: var(--slate-700); }
-        .plan-ph span { font-family: var(--font-sans); font-size: var(--text-small); color: var(--slate-500); }
-
         /* ── Reserve form ── */
         .reserve { background: var(--slate-50); }
         .reserve-form {
@@ -392,22 +377,6 @@
                         </div>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ Location / 3D renderings ══════════════ -->
-    <section class="section">
-        <div class="container">
-            <p class="eyebrow reveal">Plan Overview</p>
-            <h2 class="section-headline reveal">Come visit and explore.</h2>
-            <p class="section-sub reveal">3D renderings and a floor plan showing where each event space is located within the Center.</p>
-            <div class="plan-block reveal">
-                <div class="plan-ph">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M3 21h18"/><path d="M9 21v-6h6v6"/><path d="M9 9h.01M15 9h.01"/></svg>
-                    <strong>3D renderings &amp; floor plan</strong>
-                    <span>Placeholder — renderings and the space-location map will drop in here.</span>
-                </div>
             </div>
         </div>
     </section>
