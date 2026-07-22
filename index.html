@@ -146,47 +146,20 @@
             .room__specs { grid-template-columns: 1fr; }
         }
 
-        /* ── Reserve form ── */
+        /* ── Reserve CTA ── */
         .reserve { background: var(--slate-50); }
-        .reserve-form {
-            max-width: 780px; margin: clamp(2.5rem, 4vw, 3.5rem) auto 0;
-            background: var(--surface-page); border: 1px solid var(--border-strong);
-            border-radius: 18px; padding: clamp(1.5rem, 4vw, 2.75rem);
-            box-shadow: 0 8px 30px rgba(40,56,69,0.07);
+        .reserve-cta { text-align: center; margin-top: clamp(2.25rem, 4vw, 3.25rem); }
+        /* Large version of the copper .btn--primary used in the nav/hero */
+        .btn--xl {
+            padding: 1.15rem 3rem;
+            font-size: 1.125rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(212,121,47,0.25);
         }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem 1.35rem; }
-        .field { display: flex; flex-direction: column; gap: 0.4rem; }
-        .field--full { grid-column: 1 / -1; }
-        .field > label {
-            font-family: var(--font-sans); font-size: var(--text-small);
-            font-weight: var(--weight-semibold); color: var(--slate-700); letter-spacing: 0.01em;
+        .btn--xl:hover { box-shadow: 0 10px 28px rgba(212,121,47,0.32); }
+        @media (max-width: 520px) {
+            .btn--xl { padding: 1rem 2rem; font-size: 1.0625rem; width: 100%; justify-content: center; }
         }
-        .field .req { color: var(--copper); }
-        .field input,
-        .field select {
-            font-family: var(--font-sans); font-size: 1rem; color: var(--slate-800);
-            padding: 0.7rem 0.85rem; border: 1px solid var(--slate-200);
-            border-radius: 8px; background: #fff; width: 100%;
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
-        .field input::placeholder { color: var(--slate-300); }
-        .field input:focus,
-        .field select:focus {
-            outline: none; border-color: var(--copper);
-            box-shadow: 0 0 0 3px rgba(212,121,47,0.15);
-        }
-        .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23697B8C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.25rem; cursor: pointer; }
-        /* Yes/No radio groups */
-        .field--choice { gap: 0.55rem; }
-        .radio-row { display: flex; gap: 1.5rem; padding-top: 0.15rem; }
-        .radio-opt { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-sans); font-size: 0.95rem; color: var(--slate-700); cursor: pointer; }
-        .radio-opt input { width: 18px; height: 18px; accent-color: var(--copper); cursor: pointer; }
-        .form-submit { margin-top: 1.75rem; text-align: center; }
-        .form-note {
-            font-family: var(--font-sans); font-size: var(--text-caption); font-style: italic;
-            color: var(--slate-400); text-align: center; margin-top: 0.9rem;
-        }
-        @media (max-width: 620px) { .form-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -385,77 +358,12 @@
     <section class="section reserve" id="reserve">
         <div class="container">
             <p class="eyebrow reveal" style="text-align:center;">Reserve</p>
-            <h2 class="section-headline reveal" style="text-align:center;">Request your event date.</h2>
-            <p class="section-sub reveal" style="text-align:center;margin-left:auto;margin-right:auto;">Tell us about your event and the CoSpark Center team will follow up to confirm availability.</p>
-
-            <form class="reserve-form reveal" aria-label="Event reservation request">
-                <div class="form-grid">
-                    <div class="field">
-                        <label for="f-name">Name <span class="req">*</span></label>
-                        <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Your full name" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-email">Email <span class="req">*</span></label>
-                        <input type="email" id="f-email" name="email" autocomplete="email" placeholder="you@example.com" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-phone">Phone <span class="req">*</span></label>
-                        <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="(719) 555-0123" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-business">Business name</label>
-                        <input type="text" id="f-business" name="business" autocomplete="organization" placeholder="Optional">
-                    </div>
-                    <div class="field">
-                        <label for="f-date">Event date <span class="req">*</span></label>
-                        <input type="date" id="f-date" name="event_date" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-location">Event location <span class="req">*</span></label>
-                        <select id="f-location" name="event_location" required>
-                            <option value="" selected disabled>Select a space</option>
-                            <option>The Celebration Room</option>
-                            <option>The Commons</option>
-                            <option>The Library</option>
-                            <option>Not sure yet / help me choose</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label for="f-start">Start time <span class="req">*</span></label>
-                        <input type="time" id="f-start" name="start_time" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-end">Finish time <span class="req">*</span></label>
-                        <input type="time" id="f-end" name="end_time" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-attendees">Number of attendees <span class="req">*</span></label>
-                        <input type="number" id="f-attendees" name="attendees" min="1" placeholder="e.g. 25" required>
-                    </div>
-                    <div class="field">
-                        <label for="f-type">Event type <span class="req">*</span></label>
-                        <input type="text" id="f-type" name="event_type" placeholder="e.g. Meeting, workshop, celebration" required>
-                    </div>
-                    <div class="field field--choice field--full">
-                        <label>Catering needed?</label>
-                        <div class="radio-row" role="radiogroup" aria-label="Catering needed">
-                            <label class="radio-opt"><input type="radio" name="catering" value="yes"> Yes</label>
-                            <label class="radio-opt"><input type="radio" name="catering" value="no" checked> No</label>
-                        </div>
-                    </div>
-                    <div class="field field--choice field--full">
-                        <label>AV needed?</label>
-                        <div class="radio-row" role="radiogroup" aria-label="AV needed">
-                            <label class="radio-opt"><input type="radio" name="av" value="yes"> Yes</label>
-                            <label class="radio-opt"><input type="radio" name="av" value="no" checked> No</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-submit">
-                    <button type="button" class="btn btn--primary" style="padding:1.1rem 2.75rem;font-size:1.0625rem;">Submit Request</button>
-                    <p class="form-note">This form connects to the CoSpark Event CRM — integration pending.</p>
-                </div>
-            </form>
+            <h2 class="section-headline reveal" style="text-align:center;">Reserve your space now</h2>
+            <p class="section-sub reveal" style="text-align:center;margin-left:auto;margin-right:auto;">Click below and tell us about your event. The CoSpark Center team will follow up to confirm availability.</p>
+            <div class="reserve-cta reveal">
+                <!-- TODO: replace href="#" with the live reservation / booking URL -->
+                <a href="#" class="btn btn--primary btn--xl">Start your reservation</a>
+            </div>
         </div>
     </section>
 
