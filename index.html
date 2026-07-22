@@ -63,7 +63,9 @@
 
         /* Tighten the gap between the intro and the Spaces section */
         #intro { padding-bottom: clamp(1.75rem, 3.5vw, 3rem); }
-        #spaces { padding-top: clamp(1.75rem, 3.5vw, 3rem); }
+        /* No bottom pad — the Reserve section's own top pad supplies the gap, so the
+           space above "Reserve your space now" matches the space below the button. */
+        #spaces { padding-top: clamp(1.75rem, 3.5vw, 3rem); padding-bottom: 0; }
         /* Left-align the Spaces heading (override the centered .faq default) */
         #spaces .section-headline { text-align: left; }
 
